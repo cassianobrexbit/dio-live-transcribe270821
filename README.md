@@ -3,15 +3,15 @@ Repositório de código para a live sobre o Amazon Transcribe da Digital Innovat
 
 ### Recursos AWS utilizados na atividade:
 
-- IAM Role para trigger do Amazon Transcribe
-- Função Lambda
-- Buckets de entrada e saída de arquivos no S3
+- IAM Role para trigger do Amazon Transcribe.
+- Função Lambda.
+- Buckets de entrada e saída de arquivos no S3.
 
 ### Desenvolvimento
 
 #### Criar Role no IAM com permissões para o Transcribe
 
-- IAM Dashboard -> Create Role -> AWS [Service Lambda] -> Policies [CloudWatchLogsFullAccess e AmazonTranscribeFullAccess] -> Inserir um nome -> Create new Role
+- IAM Dashboard -> Create Role -> AWS [Service Lambda] -> Policies [CloudWatchLogsFullAccess e AmazonTranscribeFullAccess] -> Inserir um nome -> Create new Role.
 
 #### Criar função lambda
 
@@ -24,12 +24,24 @@ A função Lambda executa os seguintes passos quando disparada:
 
 #### Criando buckets de entrada e saída e o evento para disparar o gatilho da função lambda
 
- - S3 Dashboard -> Create bucket -> Selecionar região -> Manter o restante as configurações padrão -> Create bucket
- Repetir a operação para o bucket de saída
+ - S3 Dashboard -> Create bucket -> Selecionar região -> Manter o restante as configurações padrão -> Create bucket.
+ Repetir a operação para o bucket de saída.
  
 #### Atribuindo permissões de escrita para o bucket S3 de saída
 
 - IAM Dashboard -> Policies -> Create Policy -> Select a service -> Choose a service [S3] -> Actions [List -> ListBucket] - [Write -> PutObject] -> Resources -> Specific
-  - bucket: ```arn:aws:s3:::<seu_bucket_de_saida>``` 
-  - object: ```arn:aws:s3:::<seu_bucket_de_saida/*>``` 
-- Next -> Next -> Name -> Create Policy
+  - bucket: ```arn:aws:s3:::<seu_bucket_de_saida>``` .
+  - object: ```arn:aws:s3:::<seu_bucket_de_saida/*>```. 
+- Next -> Next -> Name -> Create Policy.
+
+Adicionar a política criada à função Lambda
+
+- IAM Dashboard -> Roles -> Selecionar a role criada -> Attach Policies -> Buscar a Policy criada anteriormente -> Attach policy
+
+#### Executando a aplicação
+
+- Acessar o site https://freetts.com/Home/PortugueseTTS e gerar um arquivo de áudio por meio de palavras digitadas. É o oposto do Transcribe nesse caso.
+- Fazer o download do arquivo.
+- Acessar o S3 e fazer o upload do arquivo.
+- Acessar o console do Transcribe para acompanhar o status da execução do job de transcrição.
+- Acessar o bucket de saída e realizar o download do arquivo JSON com a transcrição.
