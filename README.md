@@ -38,6 +38,14 @@ Adicionar a política criada à função Lambda
 
 - IAM Dashboard -> Roles -> Selecionar a role criada -> Attach Policies -> Buscar a Policy criada anteriormente -> Attach policy
 
+#### Criando o evento no S3 para disparar a função ambda
+
+ - S3 Dashboard -> Selecionar o bucket de entrada dos arquivos -> Event notifications -> Create event notification
+   - Inserir um nome
+   - All object create events
+   - Destination -> Lambda function -> selecionar a função lambda criada
+   - Save changes
+
 #### Executando a aplicação
 
 - Acessar o site https://freetts.com/Home/PortugueseTTS e gerar um arquivo de áudio por meio de palavras digitadas. É o oposto do Transcribe nesse caso.
